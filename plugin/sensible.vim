@@ -17,6 +17,18 @@ endif
 
 " Use :help 'option' to see the documentation for the given option.
 
+set hidden
+set ttyfast
+
+set cursorline
+autocmd BufEnter * setlocal cursorline
+autocmd BufLeave * setlocal nocursorline
+
+set splitbelow splitright
+set mousehide
+
+set belloff=all
+
 set autoindent
 set backspace=indent,eol,start
 set complete-=i
@@ -24,20 +36,47 @@ set smarttab
 
 set nrformats-=octal
 
+set timeoutlen=250
+
 if !has('nvim') && &ttimeoutlen == -1
   set ttimeout
-  set ttimeoutlen=100
+  set ttimeoutlen=50
 endif
 
+set magic
+set hlsearch
+set ignorecase smartcase
 set incsearch
 " Use <C-L> to clear the highlighting of :set hlsearch.
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
 
+set expandtab
+set smarttab
+
+set nowrap
+
 set laststatus=2
 set ruler
 set wildmenu
+set wildmode=full
+
+set nobackup
+set nowritebackup
+set noswapfile
+
+set nomodeline
+
+set nostartofline
+
+set softtabstop=4
+set tabstop=4
+set shiftwidth=4
+
+set showmatch
+set signcolumn=yes
+set updatetime=100
 
 if !&scrolloff
   set scrolloff=1
@@ -68,6 +107,8 @@ if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'
 endif
 
 set autoread
+set undofile
+set undodir=~/.cache/vim/undodir
 
 if &history < 1000
   set history=1000
@@ -84,6 +125,14 @@ set viewoptions-=options
 " Allow color schemes to do bright colors without forcing bold.
 if &t_Co == 8 && $TERM !~# '^Eterm'
   set t_Co=16
+endif
+
+if exists('+breakindent')
+    set breakindent showbreak=\ +
+endif
+
+if exists('+macmeta')
+    setglobal macmeta
 endif
 
 " Load matchit.vim, but only if the user hasn't installed a newer version.
