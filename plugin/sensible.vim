@@ -43,6 +43,10 @@ if !has('nvim') && &ttimeoutlen == -1
   set ttimeoutlen=50
 endif
 
+if has('nvim')
+    set inccommand=nosplit
+endif
+
 set magic
 set hlsearch
 set ignorecase smartcase
